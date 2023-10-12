@@ -3,7 +3,7 @@ package net.zhuruoling.nekobot.message
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Message(val scene: String, val messageType: MessageType, val messagePlain: String)
+data class Message(val scene: String, val messageType: MessageType, val messagePlain: String, val status:Boolean = true)
 
 enum class MessageType {
     GROUP, PRIVATE
@@ -13,16 +13,18 @@ class MessageResponse(val scene: String, val messageType: MessageType) {
     val messageText = StringBuilder()
 
     operator fun String.unaryPlus(){
-        messageText.append(this)
+        messageText.append(this + "\n")
     }
 
-    fun appendLine(string: String){
-        messageText.append(string + '\n')
+    fun append(string: String){
+        messageText.append(string)
     }
 
     fun toMessage() = Message(scene, messageType, messageText.toString())
+
+    fun toMessage(status: Boolean) = Message(scene, messageType, messageText.toString(), status)
 }
 
-fun <T> MessageResponse(scene: String, messageType: MessageType, fn: MessageResponse.() -> T):T {
-    return fn(MessageResponse(scene, messageType))
+fun MessageResponse(scene: String, messageType: MessageType, fn: MessageResponse.() -> Unit):MessageResponse {
+    return MessageResponse(scene, messageType).apply(fn)
 }

@@ -6,7 +6,9 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import net.zhuruoling.nekobot.command.CommandManager
 import net.zhuruoling.nekobot.message.Message
+import net.zhuruoling.nekobot.util.getVersionInfoString
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -19,15 +21,16 @@ fun Application.configureRouting() {
             call.respondText("PONG")
         }
         route("/nekobot"){
-            get("status") {
-                return@get call.respondText("${System.currentTimeMillis()} NekoBot RUNNING")
-            }
             get {
-                return@get call.respondText("${System.currentTimeMillis()}")
+                return@get call.respondText("${System.currentTimeMillis()} NekoBot ${getVersionInfoString()}")
+            }
+            get("commands") {
+                return@get call.respond(CommandManager.commandPrefixes)
             }
             post("message"){
                 val message = call.receive<Message>()
-
+                val response = CommandManager.run(message)
+                return@post call.respond(response)
             }
         }
     }
