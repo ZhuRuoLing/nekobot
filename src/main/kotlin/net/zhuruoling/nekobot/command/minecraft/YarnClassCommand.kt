@@ -33,7 +33,7 @@ class YarnClassCommand : Command() {
                 +"**Names**"
                 +""
                 for (namespace in namespaces) {
-                    val res = result.getName(namespace)
+                    val res = result.getName(namespace) ?: continue
                     + "**$namespace**: $res"
                 }
                 +""

@@ -5,7 +5,7 @@ import net.zhuruoling.nekobot.command.CommandMessage
 import net.zhuruoling.nekobot.message.Message
 import net.zhuruoling.nekobot.message.MessageResponse
 
-class YarnFieldCommand:Command() {
+class YarnFieldCommand : Command() {
     override val commandPrefix: String
         get() = "!yf"
 
@@ -37,12 +37,12 @@ class YarnFieldCommand:Command() {
                 +"**Class Names**"
                 +""
                 for (namespace in namespaces) {
-                    +"**$namespace:** ${result.owner.getName(namespace)}"
+                    +"**$namespace:** ${result.owner.getName(namespace) ?: continue}"
                 }
                 +""
                 +"**Field Names**"
                 for (namespace in namespaces) {
-                    +"**$namespace:** ${result.getName(namespace)}"
+                    +"**$namespace:** ${result.getName(namespace) ?: continue}"
                 }
                 +""
                 +String.format(
@@ -58,9 +58,9 @@ class YarnFieldCommand:Command() {
                             L%1${'$'}s;%2${'$'}s%3${'$'}s
 
                             """.trimIndent(),
-                    result.owner.getName("yarn"),
-                    result.getName("yarn"),
-                    result.getDesc("yarn")
+                    result.owner.getName("yarn") ?: continue,
+                    result.getName("yarn") ?: continue,
+                    result.getDesc("yarn") ?: continue
                 )
 
             }

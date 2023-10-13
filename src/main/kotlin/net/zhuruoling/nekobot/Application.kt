@@ -2,7 +2,7 @@ package net.zhuruoling.nekobot
 
 import io.ktor.server.application.*
 import net.zhuruoling.nekobot.command.CommandManager
-import net.zhuruoling.nekobot.command.management.CommandCommand
+import net.zhuruoling.nekobot.command.management.HelpCommand
 import net.zhuruoling.nekobot.command.management.GroupCommand
 import net.zhuruoling.nekobot.command.management.GroupRuleCommand
 import net.zhuruoling.nekobot.command.minecraft.*
@@ -11,7 +11,6 @@ import net.zhuruoling.nekobot.config.loadConfig
 import net.zhuruoling.nekobot.plugins.*
 import org.slf4j.LoggerFactory
 import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 val executor = Executors.newFixedThreadPool(4)
@@ -39,10 +38,11 @@ fun main(args: Array<String>) {
         register(YarnClassCommand())
         register(YarnMethodCommand())
         register(YarnFieldCommand())
-        register(CommandCommand())
+        register(HelpCommand())
         register(GroupCommand())
         register(GroupRuleCommand())
     }
+    logger.info("Command Registered: ${CommandManager.commandPrefixes.joinToString(", ")}")
     logger.info("Launching Application Engine.")
     io.ktor.server.netty.EngineMain.main(args)
 }

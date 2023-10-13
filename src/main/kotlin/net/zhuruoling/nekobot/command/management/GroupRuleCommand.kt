@@ -70,6 +70,10 @@ class GroupRuleCommand : Command() {
                         }
                         return@MessageResponse
                     }
+                    if (command !in CommandManager.commands) {
+                        +"Command $command not registered."
+                        return@MessageResponse
+                    }
                     GroupRuleSetting.enableCommandForGroup(group, command)
                     +"Enabled command $command for group $group"
                 }
@@ -91,6 +95,10 @@ class GroupRuleCommand : Command() {
                             GroupRuleSetting.disableCommandForGroup(group, it)
                             +"Disabled command $it for group $group"
                         }
+                        return@MessageResponse
+                    }
+                    if (command !in CommandManager.commands) {
+                        +"Command $command not registered."
                         return@MessageResponse
                     }
                     GroupRuleSetting.disableCommandForGroup(group, command)

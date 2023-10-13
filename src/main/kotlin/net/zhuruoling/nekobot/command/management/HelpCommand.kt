@@ -3,17 +3,17 @@ package net.zhuruoling.nekobot.command.management
 import net.zhuruoling.nekobot.command.Command
 import net.zhuruoling.nekobot.command.CommandManager
 import net.zhuruoling.nekobot.command.CommandMessage
-import net.zhuruoling.nekobot.config.config
+import net.zhuruoling.nekobot.config.GroupRuleSetting
 import net.zhuruoling.nekobot.message.Message
 import net.zhuruoling.nekobot.message.MessageResponse
 import net.zhuruoling.nekobot.message.MessageType
 
-class CommandCommand :Command() {
+class HelpCommand :Command() {
     override val commandPrefix: String
-        get() = "!c"
+        get() = "!help"
 
     override val helpMessage: String
-        get() = "!c"
+        get() = "!help"
 
     override fun handle(commandMessage: CommandMessage): Message {
 //        if (commandMessage.from != MessageType.PRIVATE || commandMessage.scene !in config.operator) {
@@ -23,7 +23,9 @@ class CommandCommand :Command() {
             + "**Commands**"
             +""
             CommandManager.commands.forEach {
-                + it.value.helpMessage
+                if (commandMessage.from == MessageType.PRIVATE || GroupRuleSetting.commandEnabledFor(commandMessage.scene, it.key)) {
+                    +it.value.helpMessage
+                }
             }
         }.toMessage()
     }

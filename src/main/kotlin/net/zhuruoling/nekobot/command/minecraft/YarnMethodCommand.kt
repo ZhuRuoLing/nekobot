@@ -38,12 +38,12 @@ class YarnMethodCommand : Command() {
                 +"**Class Names**"
                 +""
                 for (namespace in namespaces) {
-                    +"**$namespace:** ${result.owner.getName(namespace)}"
+                    +"**$namespace:** ${result.owner.getName(namespace) ?: continue}"
                 }
                 +""
                 +"**Method Names**"
                 for (namespace in namespaces) {
-                    +"**$namespace:** ${result.getName(namespace)}"
+                    +"**$namespace:** ${result.getName(namespace) ?: continue}"
                 }
                 +""
                 +String.format(
@@ -59,9 +59,9 @@ class YarnMethodCommand : Command() {
                             L%1${'$'}s;%2${'$'}s%3${'$'}s
 
                             """.trimIndent(),
-                    result.owner.getName("yarn"),
-                    result.getName("yarn"),
-                    result.getDesc("yarn")
+                    result.owner.getName("yarn")?: continue,
+                    result.getName("yarn")?: continue,
+                    result.getDesc("yarn")?: continue
                 )
 
             }
