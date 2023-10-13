@@ -7,11 +7,15 @@ import net.zhuruoling.nekobot.message.MessageResponse
 
 class YarnClassCommand : Command() {
     override val commandPrefix: String = "!yc"
-    override val helpMessage: String = "!yc <className> Optional[<version | latest | latestStable>]"
+    override val helpMessage: String = "!yc <className> Optional[<version> | latest | latestStable]"
     override fun handle(commandMessage: CommandMessage): Message {
         return MessageResponse(commandMessage.scene, commandMessage.from) {
+            if (commandMessage.args.isEmpty()){
+                + helpMessage
+                return@MessageResponse
+            }
             val version = versionRepository.resolve(commandMessage[1]) ?: run {
-                +"Expected Minecraft Nersion"
+                +"Expected Minecraft Version"
                 return@MessageResponse
             }
             val data = mappingRepository.getMappingData(version)
@@ -36,7 +40,7 @@ class YarnClassCommand : Command() {
                 + "**Yarn Access Widener**: accessible\tclass\t${result.getName("yarn")}"
             }
             +"query ns: ${namespaces.joinToString(",")}"
-        }.toMessage()
+        }.toMessage(forward = true)
     }
 
     override fun prepare() {

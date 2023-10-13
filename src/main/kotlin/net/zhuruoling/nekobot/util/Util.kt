@@ -1,7 +1,9 @@
 package net.zhuruoling.nekobot.util
 
+import com.google.gson.GsonBuilder
 import java.util.*
 
+val gson = GsonBuilder().setPrettyPrinting().serializeNulls().create()
 fun getVersionInfoString(): String {
     val version = BuildProperties["version"]
     val buildTimeMillis = BuildProperties["buildTime"]?.toLong() ?: 0L
