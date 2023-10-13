@@ -1,7 +1,6 @@
 package net.zhuruoling.nekobot.command
 
 import net.zhuruoling.nekobot.message.Message
-import net.zhuruoling.nekobot.message.MessageResponse
 
 abstract class Command {
 
@@ -9,6 +8,8 @@ abstract class Command {
     open val helpMessage: String = ""
     abstract fun handle(commandMessage: CommandMessage): Message
     operator fun invoke(commandMessage: CommandMessage) = handle(commandMessage)
+    abstract fun prepare()
+    abstract fun finish()
 
 }
 

@@ -72,11 +72,11 @@ public final class MappingRepository {
 
 	private final Map<String, MappingData> mcVersionToMappingMap = new ConcurrentHashMap<>();
 
-	MappingRepository(Path dataDir) {
+	public MappingRepository(Path dataDir) {
 		this.mappingsDir = dataDir.resolve("mappings");
 	}
 
-	private void updateVersion() {
+	public void updateVersion() {
 		try {
 			// remove outdated mapping data
 			mcVersionToMappingMap.entrySet().removeIf(entry -> {
