@@ -34,24 +34,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class McVersionRepo {
-	public static final String DEFAULT_VERSION = "latestStable";
-	private static final int updatePeriodSec = 120;
+	public final String DEFAULT_VERSION = "latestStable";
+	private final int updatePeriodSec = 120;
 	private static final String metaHost = "meta.fabricmc.net";
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(McVersionRepo.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(McVersionRepo.class);
 
 	private final List<McVersionUpdateHandler> updateHandlers = new CopyOnWriteArrayList<>();
 	private final Map<String, Boolean> validVersions = new ConcurrentHashMap<>();
 	private volatile String latest;
 	private volatile String latestStable;
-
-//	McVersionRepo(DiscordBot bot) {
-//		bot.getScheduledExecutor().scheduleWithFixedDelay(this::update, 0, updatePeriodSec, TimeUnit.SECONDS);
-//	}
-
-//	public static McVersionRepo get(DiscordBot bot) {
-//		return ((McVersionModule) bot.getModule("mcversion")).getRepo();
-//	}
 
 	public @Nullable String getLatest() {
 		return latest;

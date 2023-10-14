@@ -12,9 +12,9 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
-
+val botVersion = "0.2.0"
 group = "net.zhuruoling"
-version = "0.0.1"
+version = botVersion
 
 application {
     mainClass.set("net.zhuruoling.nekobot.ApplicationKt")
@@ -31,7 +31,7 @@ kotlin{
 
 tasks {
     shadowJar {
-        archiveClassifier.set("-full")
+        archiveClassifier.set("$botVersion-full")
     }
 }
 
