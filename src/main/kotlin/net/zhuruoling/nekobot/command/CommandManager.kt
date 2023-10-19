@@ -13,14 +13,6 @@ object CommandManager {
         commands[command.commandPrefix] = command
     }
 
-    fun prepareCommands(){
-        commands.forEach { _,c -> c.prepare() }
-    }
-
-    fun finishCommands(){
-        commands.forEach { _,c -> c.finish() }
-    }
-
     fun run(input:Message):Message{
         val commandMessage = CommandMessage(input)
         return if (commands.containsKey(commandMessage.commandPrefix)){

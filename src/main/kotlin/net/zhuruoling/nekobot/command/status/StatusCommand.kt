@@ -15,13 +15,4 @@ class StatusCommand : Command() {
         MessageResponse(commandMessage.scene, commandMessage.from) {
             + "${System.currentTimeMillis()} NekoBot ${getVersionInfoString()}"
         }.toMessage()
-
-    override fun prepare() {
-
-    }
-
-    override fun finish() {
-
-    }
-
 }

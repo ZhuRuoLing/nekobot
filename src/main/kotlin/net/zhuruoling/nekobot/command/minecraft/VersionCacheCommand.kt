@@ -43,10 +43,4 @@ class VersionCacheCommand : Command() {
             }
         }.toMessage()
     }
-
-    override fun prepare() {
-    }
-
-    override fun finish() {
-    }
 }

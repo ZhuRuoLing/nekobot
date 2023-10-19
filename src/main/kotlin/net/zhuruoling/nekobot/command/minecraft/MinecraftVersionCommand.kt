@@ -42,11 +42,4 @@ class MinecraftVersionCommand : Command() {
             null -> null
             else -> if (version in MinecraftVersion.versions.keys) version else null
         }
-
-
-    override fun prepare() {
-    }
-
-    override fun finish() {
-    }
 }

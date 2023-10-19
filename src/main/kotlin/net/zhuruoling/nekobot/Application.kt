@@ -7,6 +7,7 @@ import net.zhuruoling.nekobot.command.management.GroupCommand
 import net.zhuruoling.nekobot.command.management.GroupRuleCommand
 import net.zhuruoling.nekobot.command.minecraft.*
 import net.zhuruoling.nekobot.command.status.StatusCommand
+import net.zhuruoling.nekobot.command.utility.CalculatorCommand
 import net.zhuruoling.nekobot.config.loadConfig
 import net.zhuruoling.nekobot.mcversion.MinecraftVersion
 import net.zhuruoling.nekobot.plugins.*
@@ -46,6 +47,7 @@ fun main(args: Array<String>) {
         register(GroupRuleCommand())
         register(VersionCacheCommand())
         register(MinecraftVersionCommand())
+        register(CalculatorCommand())
     }
     logger.info("Command Registered: ${CommandManager.commandPrefixes.joinToString(", ")}")
     logger.info("Launching Application Engine.")

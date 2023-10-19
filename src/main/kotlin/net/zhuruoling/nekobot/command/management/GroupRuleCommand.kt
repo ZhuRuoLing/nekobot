@@ -110,12 +110,4 @@ class GroupRuleCommand : Command() {
             }
         }.toMessage()
     }
-
-    override fun prepare() {
-
-    }
-
-    override fun finish() {
-
-    }
 }

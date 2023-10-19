@@ -67,10 +67,4 @@ class YarnFieldCommand : Command() {
             +"query ns: ${namespaces.joinToString(",")}"
         }.toMessage(forward = true)
     }
-
-    override fun prepare() {
-    }
-
-    override fun finish() {
-    }
 }

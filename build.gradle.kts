@@ -55,8 +55,10 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("it.unimi.dsi:fastutil-core:8.5.4")
     implementation("net.fabricmc:mapping-io:0.1.8")
+    implementation("io.github.murzagalin:multiplatform-expressions-evaluator:0.15.0")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
 }
 
 task("generateProperties") {

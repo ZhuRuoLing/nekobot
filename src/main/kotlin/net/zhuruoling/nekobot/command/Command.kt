@@ -8,8 +8,6 @@ abstract class Command {
     open val helpMessage: String = ""
     abstract fun handle(commandMessage: CommandMessage): Message
     operator fun invoke(commandMessage: CommandMessage) = handle(commandMessage)
-    abstract fun prepare()
-    abstract fun finish()
 
 }
 
